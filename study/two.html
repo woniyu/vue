@@ -1,0 +1,56 @@
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>vue实战</title>
+    </head>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <div id="app1">
+        <input type="text" v-model="name" placeholder="名字"/>
+        <h1>你好,{{name}}</h1>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el:'#app1',
+            data:{
+                name:'121212'
+            },
+            created:function(){
+                console.log(this.name);
+            },
+            mounted:function(){
+                console.log*(this.$el);
+            }
+
+        })
+
+
+
+        //数据双向绑定
+        // var myData = {
+        //     a:2
+        // }
+
+        // var app1 = new Vue({
+        //     el:'#app1',
+        //     data:myData
+        // })
+
+        // console.log(app1.a);
+
+        // app1.a = 3;
+
+        // console.log(myData.a);
+
+        // myData.a = 4;
+
+        // console.log(app1.a);
+        
+
+
+    </script>
+
+</html>
