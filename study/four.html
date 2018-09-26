@@ -1,0 +1,110 @@
+<html>
+<meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<style>
+    .active{
+        background-color: blue
+    }
+
+    .error{
+        background-color: red
+    }
+</style>
+
+    <body>
+
+        <!-- <div id="app" :class="{'active':isActive,'error':isError}"> -->
+        <div id="app" :class="classes"> 
+
+            <p>测试文字</p>
+
+            <div :style="styles">asaasascaacdcsad</div>
+
+            <span v-once>{{message}}</span>
+
+            <p v-if="status==1">当status是1时候，显示此行</p>
+            <p v-else-if="status==2">当status是2时候，显示此行</p>
+            <p v-else>否则显示此行</p>
+
+            <template v-if="type=='name'">
+                <label>用户名:</label>
+                <input placeholder="请输入用户名">
+            </template>
+
+            <template v-else>
+                <label>邮箱：</label>
+                <input placeholder="请输入邮箱">
+            </template>
+
+            <button v-on:click="handleToggleClick">切换输入类型</button>
+
+            <p v-show="status==1">当status是1的时候显示</p>
+
+            <ul>
+                <li v-for="(book,index) in books">{{index+1}}、{{book.name}}</li>
+            </ul>
+
+            <ul>
+                <template v-for="(book,index) in books">
+                    <li>作者:{{book.author}}</li>
+                    <li>书名：{{book.name}}</li>
+                </template>
+            </ul>
+
+            <!-- <span v-for="(value,key,index) in user">{{index+1}}、{{key}}:{{value}}</span> -->
+
+            <ul>
+                <li v-for="(value,key,index) in user">
+                    {{index+1}}、{{key}}：{{value}}
+                </li>
+            </ul>
+
+        </div>
+
+
+        <script>
+            
+            var app = new Vue({
+                el:'#app',
+                data:{
+                    isActive:false,
+                    isError:true,
+                    color:'red',
+                    fontSize:20,
+                    message:'这是一个信息',
+                    status:1,
+                    type:'name',
+                    user:{
+                        name:'fhz',
+                        age:28,
+                        address:'安徽省'
+                    },
+                    books:[
+                        {name:'vue实战',author:'fhz'},
+                        {name:'angular实战',author:'ghs'}
+                    ],
+                    styles:{
+                        color:'red',
+                        fontSize:40+'px'
+                    }
+                },
+                computed:{
+                    classes:function(){
+                        return {
+                            active:this.isActive&&!this.isError,
+                            'text-fail':this.isError&&this.isError.type==='fail'
+                        }
+                    }
+                },
+                methods:{
+                    handleToggleClick:function(){
+                        this.type=this.type=='name'?'mail':'name'
+                    }
+                }
+            });
+
+        </script>
+    </body>
+
+</html>

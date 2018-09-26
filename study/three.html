@@ -1,0 +1,96 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>vue实战</title>
+</head>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+    <div id="app">
+        <a v-bind:href="url">动态链接</a>
+        <img v-bind:src="imgUrl">
+
+        <p v-if="show">这是一段文本</p>
+        <button v-on:click="showHandler">点击隐藏文本</button>
+
+        {{reversedText}}
+
+        总价：{{price}}
+        <!-- {{reversedText()}} -->
+        <br/>
+        {{getNow()}}
+        <br/>
+        {{now}}
+
+    </div>
+
+    <script>
+        
+
+        var app = new Vue({
+            el:"#app",
+            data:{
+                url:'www.baidu.com',
+                imgUrl:'saasasasass',
+                show:true,
+                text:'123,456',
+                package1:[
+                    {
+                        name: 'ipone7',
+                        price: 7199,
+                        count: 2
+                    }
+                ],
+                package2:[
+                    {
+                        name: 'ipad',
+                        price: 6544,
+                        count: 3
+                    }
+                ]
+            },
+            methods:{
+                showHandler:function() {
+                    this.show = false;
+                },
+                init:function(text){
+                    console.log(text);
+                },
+                // reversedText:function(){
+                //     return '方法返回：'+this.text.split(',').reverse().join(',');
+                // }
+                getNow:function(){
+                    return Date.now();
+                }
+            },
+            mounted:function(){
+                this.init('初始化调用');
+            },
+            computed:{
+                reversedText:function(){
+                    return this.text.split(',').reverse().join(',');
+                },
+                price:function(){
+                    var price = 0;
+                    for(var i=0;i>this.package1.length;i++){
+                        price = price+this.package1[i].price*this.package1[i].count;
+                    }
+                    for (var i = 0; i < this.package2.length; i++) {
+                        price = price + this.package2[i].price * this.package2[i].count;
+                    }
+
+                    return price;
+                },
+                now:function(){
+                    return  Date.now();
+                }
+            }
+        })
+
+        app.init('在APP外部调用')
+
+    </script>
+
+</html>
